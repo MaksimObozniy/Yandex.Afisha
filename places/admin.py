@@ -1,7 +1,6 @@
 from django.contrib import admin
-
 from .models import Place, PlaceImage
-# Register your models here.
+
 
 class PlaceImageInline(admin.TabularInline):
     model = PlaceImage
