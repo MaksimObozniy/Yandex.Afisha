@@ -13,7 +13,7 @@ def render_map_page(request):
             'type': 'Feature',
             'geometry': {
                 'type': 'Point',
-                'coordinates': [place.longtitude, place.latitude],
+                'coordinates': [place.longitude, place.latitude],
             },
             'properties': {
                 'title': place.title,

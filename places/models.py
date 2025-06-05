@@ -6,7 +6,7 @@ class Place(models.Model):
     description_short = models.TextField(verbose_name='Краткое описание')
     description_long = models.TextField(verbose_name='Длинное описание')
     latitude = models.FloatField(verbose_name='Широта')
-    longtitude = models.FloatField(verbose_name='Долгота')
+    longitude = models.FloatField(verbose_name='Долгота')
 
     def __str__(self):
         return self.title
