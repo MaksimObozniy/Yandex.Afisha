@@ -27,4 +27,4 @@ class PlaceImage(models.Model):
         ordering = ['order'] 
     
     def __str__(self):
-        return f"{self.order} {self.place.title}"
+        return f"{self.order}{self.place.title}"

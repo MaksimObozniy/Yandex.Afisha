@@ -3,15 +3,13 @@ from django.urls import path
 from django.shortcuts import render
 from django.conf import settings
 from django.conf.urls.static import static
-
-
-def return_html(request):
-    return render(request, 'index.html')
+from places.views import render_map_page, place_detail
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', return_html),
+    path('', render_map_page),
+    path('places/<int:place_id>/', place_detail),  
 ]
 
 if settings.DEBUG:
