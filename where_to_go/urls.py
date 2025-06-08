@@ -1,10 +1,9 @@
 from django.contrib import admin
-from django.urls import path
-from django.shortcuts import render
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from places.views import render_map_page, place_detail, place_title
-from django.urls import include
+
+from places.views import render_map_page, place_detail
 
 urlpatterns = [
     path('admin/', admin.site.urls),
