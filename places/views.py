@@ -33,7 +33,7 @@ def render_map_page(request):
     }
 
     context = {
-        'places_geojson': json.dumps(geojson, ensure_ascii=False)
+        'places_geojson':geojson
     }
 
     return render(request, 'index.html', context)
