@@ -30,7 +30,6 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.SUCCESS(f'Создано место: {place.title}'))
 
-        # Картинки
         for idx, img_url in enumerate(data.get('imgs', []), start=1):
             img_response = requests.get(img_url)
             img_response.raise_for_status()
