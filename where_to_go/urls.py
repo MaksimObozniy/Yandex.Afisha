@@ -3,12 +3,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from places.views import render_map_page, place_detail
-
+from places import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', render_map_page),
-    path('places/<int:place_id>/', place_detail),
+    path('', views.render_map_page),
+    path('places/<int:place_id>/', views.place_detail, name='place_detail'),
     path('tinymce/', include('tinymce.urls'))
 ]
 
