@@ -40,10 +40,7 @@ def render_map_page(request):
 
 
 def place_detail(request, place_id):
-    try:
-        place = Place.objects.get(id=place_id)
-    except Place.DoesNotExist:
-        raise Http404('Place not found')
+    place = get_object_or_404(Place.objects.prefetch_related('images'), id=place_id)
 
     return JsonResponse({
         'title': place.title,
