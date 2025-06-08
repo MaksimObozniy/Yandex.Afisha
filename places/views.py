@@ -37,7 +37,7 @@ def render_map_page(request):
         'places_geojson': json.dumps(geojson, ensure_ascii=False)
     }
 
-    print('GEOJSON:', geojson)
+
     return render(request, 'index.html', context)
 
 
@@ -47,6 +47,6 @@ def place_detail(request, place_id):
     return JsonResponse({
         'title': place.title,
         'imgs': [img.image.url for img in place.images.all()],
-        'short_description_short': place.short_description,
-        'long_description': place.long_description,
+        'description_short': place.short_description,
+        'description_long': place.long_description,
     }, json_dumps_params={'ensure_ascii': False, 'indent': 2})
