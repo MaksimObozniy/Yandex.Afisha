@@ -18,8 +18,13 @@
 
 3. **Создайте файл `.env` в корне:**
     ```env
-    SECRET_KEY=ваш-secret-key
-    DEBUG=True
+    DJANGO_SECRET_KEY=ваш-secret-key
+    DJANGO_DEBUG=True (Прописывать это не обязательно, автоматически будет False)
+    ```
+
+    Если не указать DJANGO_SECRET_KEY, тогда при запуске любой команды с manage.py выдаст ошибку:
+    ```
+    KeyError: 'DJANGO_SECRET_KEY'
     ```
 
 4. **Выполните миграции:**
