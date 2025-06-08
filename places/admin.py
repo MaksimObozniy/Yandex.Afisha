@@ -27,3 +27,4 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
     list_display = ['__str__']
+    raw_id_fields = ['place']
