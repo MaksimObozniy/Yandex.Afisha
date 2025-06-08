@@ -11,7 +11,7 @@ def place_title(request, place_id):
 
 def render_map_page(request):
     places = Place.objects.all()
-    
+
     features = []
     for place in places:
         features.append({
@@ -35,7 +35,7 @@ def render_map_page(request):
     context = {
         'places_geojson': json.dumps(geojson, ensure_ascii=False)
     }
-    
+
     return render(request, 'index.html', context)
 
 
