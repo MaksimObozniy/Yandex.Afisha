@@ -48,6 +48,6 @@ def place_detail(request, place_id):
     return JsonResponse({
         'title': place.title,
         'imgs': [img.image.url for img in place.images.all()],
-        'description_short': place.description_short,
-        'description_long': place.description_long,
+        'short_description_short': place.short_description,
+        'long_description': place.long_description,
     }, json_dumps_params={'ensure_ascii': False, 'indent': 2})
