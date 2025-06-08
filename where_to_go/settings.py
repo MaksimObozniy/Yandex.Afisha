@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-DEBUG = os.environ.get['DJANGO_DEBUG', 'false'].lower() == 'true'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() == 'true'
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('PROJECT_ALLOWED_HOSTS', 'localhost').split(',')
  
 
 INSTALLED_APPS = [
