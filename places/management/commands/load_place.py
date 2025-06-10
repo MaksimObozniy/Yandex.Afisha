@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 from places.models import Place, PlaceImage
 
+
 class Command(BaseCommand):
     help = 'Загружает место из JSON по ссылке'
 
@@ -26,16 +27,30 @@ class Command(BaseCommand):
         )
 
         if not created:
-            self.stdout.write(self.style.WARNING(f'Место "{place.title}" уже есть'))
+            self.stdout.write(
+                self
+                .style
+                .WARNING(f'Место "{place.title}" уже есть'))
         else:
-            self.stdout.write(self.style.SUCCESS(f'Создано место: {place.title}'))
+            self.stdout.write
+            (self
+             .style
+             .SUCCESS(f'Создано место: {place.title}'))
 
         for idx, img_url in enumerate(data.get('imgs', []), start=1):
             img_response = requests.get(img_url)
             img_response.raise_for_status()
             img_name = img_url.split('/')[-1]
             image = PlaceImage(place=place, order=idx)
-            image.image.save(img_name, ContentFile(img_response.content), save=True)
-            self.stdout.write(self.style.SUCCESS(f'Загружено изображение: {img_name}'))
+            image.image.save(
+                img_name,
+                ContentFile(img_response.content), save=True)
+            self.stdout.write(
+                self
+                .style
+                .SUCCESS(f'Загружено изображение: {img_name}'))
 
-        self.stdout.write(self.style.SUCCESS(f'Место "{place.title}" загружено полностью!'))
+        self.stdout.write(
+            self
+            .style
+            .SUCCESS(f'Место "{place.title}" загружено полностью!'))

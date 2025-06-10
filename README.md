@@ -20,12 +20,13 @@
     ```env
     DJANGO_SECRET_KEY=ваш-secret-key
     DJANGO_DEBUG=True (Прописывать это не обязательно, автоматически будет False)
+    PROJECT_ALLOWED_HOSTS=localhost,127.0.0.1
     ```
+    DJANGO_SECRET_KEY — секретный ключ Django. Используется для криптографических подписей. Должен быть уникальным и храниться в секрете.
 
-    Если не указать DJANGO_SECRET_KEY, тогда при запуске любой команды с manage.py выдаст ошибку:
-    ```
-    KeyError: 'DJANGO_SECRET_KEY'
-    ```
+    DJANGO_DEBUG — режим отладки (True/False). Если указать True, проект запустится в debug-режиме с подробными ошибками. По умолчанию False (безопасный режим для продакшена).
+
+    PROJECT_ALLOWED_HOSTS — список разрешённых хостов (через запятую), с которых может работать сайт. По умолчанию: localhost. Подробнее: Django docs: [ALLOWED_HOSTS] (https://docs.djangoproject.com/en/4.2/ref/settings/#allowed-hosts)
 
 4. **Выполните миграции:**
     ```bash
