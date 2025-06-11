@@ -38,22 +38,26 @@ class Command(BaseCommand):
              .SUCCESS(f'Создано место: {place.title}'))
 
         for idx, img_url in enumerate(place_info.get('imgs', []), start=1):
-            img_response = requests.get(img_url)
-            img_response.raise_for_status()
-            img_name = img_url.split('/')[-1]
-            
-            PlaceImage.objects.create(
-                place=place,
-                order=idx,
-                image=ContentFile(img_response.content, name=img_name)
-            )
-            
+            try:
+                img_response = requests.get(img_url)
+                img_response.raise_for_status()
+                img_name = img_url.split('/')[-1]
+                
+                PlaceImage.objects.create(
+                    place=place,
+                    order=idx,
+                    image=ContentFile(img_response.content, name=img_name)
+                )
+
+                self.stdout.write(
+                    self
+                    .style
+                    .SUCCESS(f'Загружено изображение: {img_name}'))
+            except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as exc:
+                print(f"не удалось загрузить изображение {img_url}: {exc}")
+
             self.stdout.write(
                 self
                 .style
-                .SUCCESS(f'Загружено изображение: {img_name}'))
+                .SUCCESS(f'Место "{place.title}" загружено полностью!'))
 
-        self.stdout.write(
-            self
-            .style
-            .SUCCESS(f'Место "{place.title}" загружено полностью!'))
