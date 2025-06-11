@@ -41,10 +41,13 @@ class Command(BaseCommand):
             img_response = requests.get(img_url)
             img_response.raise_for_status()
             img_name = img_url.split('/')[-1]
-            image = PlaceImage(place=place, order=idx)
-            image.image.save(
-                img_name,
-                ContentFile(img_response.content), save=True)
+            
+            PlaceImage.objects.create(
+                place=place,
+                order=idx,
+                image=ContentFile(img_response.content, name=img_name)
+            )
+            
             self.stdout.write(
                 self
                 .style
