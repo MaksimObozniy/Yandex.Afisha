@@ -14,15 +14,15 @@ class Command(BaseCommand):
         json_url = options['json_url']
         response = requests.get(json_url)
         response.raise_for_status()
-        data = response.json()
+        place_info = response.json()
 
         place, created = Place.objects.get_or_create(
-            title=data['title'],
+            title=place_info['title'],
             defaults={
-                'short_description': data.get('description_short', ''),
-                'long_description': data.get('description_long', ''),
-                'latitude': data['coordinates']['lat'],
-                'longitude': data['coordinates']['lng'],
+                'short_description': place_info.get('description_short', ''),
+                'long_description': place_info.get('description_long', ''),
+                'latitude': place_info['coordinates']['lat'],
+                'longitude': place_info['coordinates']['lng'],
             }
         )
 
@@ -37,7 +37,7 @@ class Command(BaseCommand):
              .style
              .SUCCESS(f'Создано место: {place.title}'))
 
-        for idx, img_url in enumerate(data.get('imgs', []), start=1):
+        for idx, img_url in enumerate(place_info.get('imgs', []), start=1):
             img_response = requests.get(img_url)
             img_response.raise_for_status()
             img_name = img_url.split('/')[-1]
