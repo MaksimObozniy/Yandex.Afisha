@@ -11,6 +11,7 @@ class Command(BaseCommand):
         parser.add_argument('json_url', type=str, help='Ссылка на JSON')
 
     def handle(self, *args, **options):
+
         json_url = options['json_url']
         response = requests.get(json_url)
         response.raise_for_status()
@@ -42,7 +43,7 @@ class Command(BaseCommand):
                 img_response = requests.get(img_url)
                 img_response.raise_for_status()
                 img_name = img_url.split('/')[-1]
-                
+
                 PlaceImage.objects.create(
                     place=place,
                     order=idx,
@@ -56,8 +57,8 @@ class Command(BaseCommand):
             except (requests.exceptions.HTTPError, requests.exceptions.ConnectionError) as exc:
                 print(f"не удалось загрузить изображение {img_url}: {exc}")
 
-            self.stdout.write(
-                self
-                .style
-                .SUCCESS(f'Место "{place.title}" загружено полностью!'))
+        self.stdout.write(
+            self
+            .style
+            .SUCCESS(f'Место "{place.title}" загружено полностью!'))
 
